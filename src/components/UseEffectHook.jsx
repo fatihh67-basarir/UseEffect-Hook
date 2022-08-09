@@ -14,13 +14,28 @@ const UseEffectHook = () => {
     //   },3000)
     // }, [])
 
-    ! ComponentDidMount + ComponentDidUpdate
+    // ! ComponentDidMount + ComponentDidUpdate
+    // useEffect(() => {
+    //   console.log("Mounted" + "Update");
+    //   setTimeout(() => {
+    //     alert("Data Fetch")
+    //   },3000)
+    // }, [count])
+
+    //! ComponentDidMount + ComponentWillUnmount
+    const fetchData = () => {
+        console.log("Data Fetched");
+    };
     useEffect(() => {
-      console.log("Mounted" + "Update");
-      setTimeout(() => {
-        alert("Data Fetch")
-      },3000)
-    }, [count])
+      const timerId = setInterval( fetchData, 1000)
+      console.log("Mounted");
+    
+      return () => {
+        clearInterval(timerId)
+        console.log("unmount");
+      }
+    }, [])
+    
     
     
     console.log("rendered");
